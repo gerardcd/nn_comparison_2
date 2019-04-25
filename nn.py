@@ -1,16 +1,14 @@
 from __future__ import print_function
 
-from keras.backend import dropout
 from keras.models import Sequential
-from keras.layers import Dense, Activation, Dropout, Embedding
+from keras.layers import Dense, Activation, Dropout
 
-import pickle
 import matplotlib.pyplot as plt
 
 from config import batch_size, num_classes, epochs, hidden_size, max_sentence_lenght, embedding_vector_length, vocab_size
 
 
-def createModel(xTrain, yTrain, xTest, yTest, tokenizer):
+def createModel(xTrain, yTrain, xTest, yTest):
 
     model = Sequential()
     model.add(Dense(hidden_size, input_shape=(vocab_size,)))
@@ -35,10 +33,6 @@ def createModel(xTrain, yTrain, xTest, yTest, tokenizer):
 
     model.save_weights("model.h5")
     print("Saved model to disk")
-
-    with open('tokenizer.pickle', 'wb') as handle:
-        pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
-    print("Saved tokenizer to disk")
 
     plt.plot(history.history['loss'])
     plt.show()

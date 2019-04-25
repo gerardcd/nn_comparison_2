@@ -2,10 +2,10 @@ from keras.preprocessing.text import Tokenizer
 from keras.utils import to_categorical
 from keras.preprocessing import sequence
 
-import numpy as np
 import sqlite3
 import random
 import re
+import pickle
 
 from nltk import word_tokenize
 from nltk.stem import SnowballStemmer
@@ -21,7 +21,6 @@ def stem(text):
 
     return [stemmer.stem(word) for word in word_tokenize(text)]
     #return [word for word in text.split()]
-
 
 
 def dataFromDB():
@@ -45,12 +44,20 @@ def dataFromDB():
 
     return (xData, yData)
 
+def saveTokenizer(tokenizer):
+    with open('tokenizer.pickle', 'wb') as handle:
+        pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    print("Saved tokenizer to disk")
+
 
 def getData(net):
     (x, y) = dataFromDB()
 
     tokenizer = Tokenizer(num_words=vocab_size)
     tokenizer.fit_on_texts(x)
+
+    saveTokenizer(tokenizer)
 
     x = tokenizer.texts_to_sequences(x)
 
@@ -71,4 +78,4 @@ def getData(net):
     yTrain = y[:nTrain]
     yTest = y[nTrain:]
 
-    return (xTrain, yTrain, xTest, yTest, tokenizer)
+    return (xTrain, yTrain, xTest, yTest)
