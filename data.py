@@ -20,7 +20,6 @@ def stem(text):
     text = re.sub(r"(#\S+|http(s|)://\S+|@\S+)", "", text)
 
     return [stemmer.stem(word) for word in word_tokenize(text)]
-    #return [word for word in text.split()]
 
 
 def dataFromDB():
@@ -42,13 +41,7 @@ def dataFromDB():
         xData.append(text)
         yData.append(clas)
 
-    return (xData, yData)
-
-def saveTokenizer(tokenizer):
-    with open('tokenizer.pickle', 'wb') as handle:
-        pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
-
-    print("Saved tokenizer to disk")
+    return xData, yData
 
 
 def getData(net):
@@ -57,14 +50,12 @@ def getData(net):
     tokenizer = Tokenizer(num_words=vocab_size)
     tokenizer.fit_on_texts(x)
 
-    saveTokenizer(tokenizer)
-
     x = tokenizer.texts_to_sequences(x)
 
     if net == 'NN':
         x = tokenizer.sequences_to_matrix(x, mode='binary')
 
-    if net == 'LSTM':
+    if net == 'LSTM' or net == 'RNN':
         x = sequence.pad_sequences(x, maxlen=max_sentence_lenght)
 
     y = to_categorical(y, 2)
