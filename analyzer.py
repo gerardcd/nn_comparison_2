@@ -57,7 +57,7 @@ def runInstance(model, hidden_size, embbeding_size=None):
 
 # Average instance metrics
 def runInstanceAvg(*args):
-    rounds = 1
+    rounds = 5
 
     metrics_avg = (.0, .0, .0, .0, .0)
     for i in range(rounds):

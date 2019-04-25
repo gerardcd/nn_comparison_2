@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import pandas
 
 NN = 'NN'
@@ -12,3 +13,7 @@ TRAIN_ACC = -4
 TEST_LOSS = -3
 TEST_ACC = -2
 TIME = -1
+
+nn_results = pandas.read_csv('results_bu/nn_results.csv')
+rnn_results = pandas.read_csv('results_bu/rnn_results.csv')
+lstm_results = pandas.read_csv('results_bu/lstm_results.csv')
