@@ -71,7 +71,7 @@ def runInstanceAvg(*args):
 
 # TIME AND ACCURACY EXPERIMENTS
 
-twos = [2 ** x for x in range(4, 10)]
+twos = [2 ** x for x in range(1, 10)]
 
 # Empty the results files
 open('results/nn_results.csv', 'w').close()
@@ -80,9 +80,9 @@ open('results/lstm_results.csv', 'w').close()
 
 with open('results/nn_results.csv', 'a') as nn_results, open('results/rnn_results.csv', 'a') as rnn_results, open('results/lstm_results.csv', 'a') as lstm_results:
 
-    nn_results.write('hidden_size, train_loss, train_accuracy, test_loss, test_accuracy, time\n')
-    rnn_results.write('hidden_size, embedding_size, train_loss, train_accuracy, test_loss, test_accuracy, time\n')
-    lstm_results.write('hidden_size, embedding_size, train_loss, train_accuracy, test_loss, test_accuracy, time\n')
+    nn_results.write('hidden_size,train_loss,train_accuracy,test_loss,test_accuracy,time\n')
+    rnn_results.write('hidden_size,embedding_size,train_loss,train_accuracy,test_loss,test_accuracy,time\n')
+    lstm_results.write('hidden_size,embedding_size,train_loss,train_accuracy,test_loss,test_accuracy,time\n')
 
     for hidden_size in twos:
         # Run NN
