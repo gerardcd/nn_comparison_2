@@ -1,0 +1,14 @@
+import pandas
+
+NN = 'NN'
+RNN = 'RNN'
+LSTM = 'LSTM'
+
+HIDDEN_SIZE = 0
+EMBEDDING_SIZE = 1
+
+TRAIN_LOSS = -5
+TRAIN_ACC = -4
+TEST_LOSS = -3
+TEST_ACC = -2
+TIME = -1

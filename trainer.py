@@ -7,18 +7,23 @@ import matplotlib.pyplot as plt
 from data import getData
 from config import batch_size, epochs, verbose
 
-net = sys.argv[1] or 'NN'
+net = sys.argv[1]
+hidden_size = int(sys.argv[2])
+embedding_vector_length = None
+
+if net in ['LSTM', 'RNN']:
+    embedding_vector_length = int(sys.argv[3])
 
 (xTrain, yTrain, xTest, yTest) = getData(net)
 
 if net == 'NN':
-    model = nn.create_model()
+    model = nn.create_model(hidden_size)
 
 elif net == 'LSTM':
-    model = lstm.create_model()
+    model = lstm.create_model(hidden_size, embedding_vector_length)
 
 elif net == 'RNN':
-    model = rnn.create_model()
+    model = rnn.create_model(hidden_size, embedding_vector_length)
 
 else:
     raise Exception('Unknown model specified')

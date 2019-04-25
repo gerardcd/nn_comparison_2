@@ -55,7 +55,7 @@ def getData(net):
     if net == 'NN':
         x = tokenizer.sequences_to_matrix(x, mode='binary')
 
-    if net == 'LSTM' or net == 'RNN':
+    if net in ['LSTM', 'RNN']:
         x = sequence.pad_sequences(x, maxlen=max_sentence_lenght)
 
     y = to_categorical(y, 2)
